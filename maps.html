@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AquaWatch - Map</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <header>
+        <h1>AquaWatch 🌊</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="map.html">Map</a>
+            <a href="predict.html">Predict</a>
+            <a href="report.html">Report</a>
+            <a href="learn.html">Learn</a>
+        </nav>
+    </header>
+
+    <section id="map" style="height: 500px;"></section>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+    var map = L.map('map').setView([28.6448, 77.216721], 5); // Centered in India
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Example markers
+    L.marker([28.6448, 77.216721]).addTo(map)
+        .bindPopup('River Yamuna - Polluted')
+        .openPopup();
+
+    L.marker([19.0760, 72.8777]).addTo(map)
+        .bindPopup('Lake Powai - Safe');
+    </script>
+</body>
+</html>
