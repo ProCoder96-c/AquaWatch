@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaWatch | Smart Water Quality Monitoring</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">AquaWatch</div>
+                <ul class="nav-links">
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#map">Water Map</a></li>
+                    <li><a href="#predictions">Predictions</a></li>
+                    <li><a href="#report">Report</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <div class="burger">
+                    <div class="line1"></div>
+                    <div class="line2"></div>
+                    <div class="line3"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Smart Water Quality Monitoring & Prediction</h1>
+            <p>Real-time tracking and predictive analysis of water bodies across the country</p>
+            <a href="#dashboard" class="btn">View Dashboard</a>
+        </div>
+    </section>
+
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2>Water Quality Dashboard</h2>
+            <div class="alert-banner" id="alertBanner">
+                <span class="close-btn" onclick="closeAlert()">&times;</span>
+                <strong>Alert!</strong> High pollution levels detected in Yamuna River, Delhi. Avoid direct contact.
+            </div>
+            
+            <div class="parameter-selector">
+                <select id="parameterSelect">
+                    <option value="ph">pH Level</option>
+                    <option value="do">Dissolved Oxygen</option>
+                    <option value="turbidity">Turbidity</option>
+                    <option value="nitrate">Nitrate Levels</option>
+                    <option value="heavyMetals">Heavy Metals</option>
+                </select>
+                <select id="locationSelect">
+                    <option value="all">All Locations</option>
+                    <option value="yamuna">Yamuna River</option>
+                    <option value="ganga">Ganga River</option>
+                    <option value="chilika">Chilika Lake</option>
+                    <option value="ulsoor">Ulsoor Lake</option>
+                </select>
+            </div>
+            
+            <div class="chart-container">
+                <canvas id="waterQualityChart"></canvas>
+            </div>
+            
+            <div class="status-cards">
+                <div class="card">
+                    <h3>Yamuna River</h3>
+                    <div class="status critical">Critical</div>
+                    <p>pH: 6.2 | DO: 4.1 mg/L</p>
+                </div>
+                <div class="card">
+                    <h3>Ganga River</h3>
+                    <div class="status moderate">Moderate</div>
+                    <p>pH: 7.1 | DO: 5.8 mg/L</p>
+                </div>
+                <div class="card">
+                    <h3>Chilika Lake</h3>
+                    <div class="status good">Good</div>
+                    <p>pH: 7.5 | DO: 6.7 mg/L</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="map" class="water-map">
+        <div class="container">
+            <h2>Interactive Water Body Map</h2>
+            <div id="mapContainer"></div>
+            <div class="map-legend">
+                <div><span class="legend-good"></span> Good Quality</div>
+                <div><span class="legend-moderate"></span> Moderate</div>
+                <div><span class="legend-critical"></span> Critical</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="predictions" class="predictions">
+        <div class="container">
+            <h2>Pollution Risk Prediction</h2>
+            <div class="prediction-cards">
+                <div class="pred-card">
+                    <h3>Yamuna River</h3>
+                    <p>High risk of increased pollution in next 7 days</p>
+                    <div class="risk high">High Risk</div>
+                    <canvas id="predictionChart1"></canvas>
+                </div>
+                <div class="pred-card">
+                    <h3>Ganga River</h3>
+                    <p>Moderate risk of pollution increase</p>
+                    <div class="risk moderate">Moderate Risk</div>
+                    <canvas id="predictionChart2"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="report" class="report">
+        <div class="container">
+            <h2>Report Water Pollution</h2>
+            <form id="reportForm">
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" required>
+                </div>
+                <div class="form-group">
+                    <label for="waterBody">Water Body</label>
+                    <select id="waterBody" name="waterBody" required>
+                        <option value="">Select water body</option>
+                        <option value="river">River</option>
+                        <option value="lake">Lake</option>
+                        <option value="reservoir">Reservoir</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pollutionType">Pollution Type</label>
+                    <select id="pollutionType" name="pollutionType" required>
+                        <option value="">Select type</option>
+                        <option value="industrial">Industrial Waste</option>
+                        <option value="sewage">Sewage</option>
+                        <option value="agricultural">Agricultural Runoff</option>
+                        <option value="plastic">Plastic Waste</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="photo">Upload Photo (Optional)</label>
+                    <input type="file" id="photo" name="photo" accept="image/*">
+                </div>
+                <button type="submit" class="btn">Submit Report</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Water Pollution</h2>
+            <div class="about-content">
+                <div class="about-card">
+                    <h3>Causes</h3>
+                    <ul>
+                        <li>Industrial waste discharge</li>
+                        <li>Sewage and wastewater</li>
+                        <li>Agricultural runoff</li>
+                        <li>Plastic and solid waste</li>
+                        <li>Oil spills</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <h3>Effects</h3>
+                    <ul>
+                        <li>Harm to aquatic life</li>
+                        <li>Waterborne diseases</li>
+                        <li>Disruption of ecosystems</li>
+                        <li>Contaminated drinking water</li>
+                        <li>Economic impacts</li>
+                    </ul>
+                </div>
+                <div class="about-card">
+                    <h3>Prevention</h3>
+                    <ul>
+                        <li>Proper waste treatment</li>
+                        <li>Reduce plastic use</li>
+                        <li>Sustainable agriculture</li>
+                        <li>Community monitoring</li>
+                        <li>Policy enforcement</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 AquaWatch. All rights reserved.</p>
+            <p>Data sources: CPCB, OpenAQ, Kaggle Water Quality Datasets</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/map.js"></script>
+</body>
+</html>
